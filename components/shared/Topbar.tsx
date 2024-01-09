@@ -29,7 +29,6 @@ function Topbar() {
               </div>
             </SignOutButton>
           </SignedIn>
-          
         </div>
 
         <OrganizationSwitcher
