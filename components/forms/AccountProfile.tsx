@@ -11,7 +11,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea} from "@/components/ui/textarea";
+import { Textarea } from "@/components/ui/textarea";
 
 import { UserValidation } from "@/lib/validations/user";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -36,16 +36,19 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
   const form = useForm({
     resolver: zodResolver(UserValidation),
     defaultValues: {
-      Profile_photo: "",
-      name: "",
-      username: "",
-      bio: "",
+      profile_photo: user?.image || "",
+      name: user?.name || "",
+      username: user?.username || "",
+      bio: user?.bio || "",
     },
   });
 
-  const handleImage = (e: ChangeEvent , fieldChange: (value: string) => void) =>{
+  const handleImage = (
+    e: ChangeEvent,
+    fieldChange: (value: string) => void
+  ) => {
     e.preventDefault();
-  }
+  };
 
   function onSubmit(values: z.infer<typeof UserValidation>) {
     // Do something with the form values.
@@ -111,11 +114,10 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
-       />
-       <FormField
+        />
+        <FormField
           control={form.control}
           name="username"
           render={({ field }) => (
@@ -130,7 +132,6 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -150,12 +151,11 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
-        
-        <Button type="submit">Submit</Button>
+
+        <Button type="submit" className="bg-primary-500">Submit</Button>
       </form>
     </Form>
   );
