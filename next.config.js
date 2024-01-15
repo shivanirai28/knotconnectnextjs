@@ -12,7 +12,7 @@ const nextConfig = {
             hostname: "img.clerk.com",
           },
           {
-            protocol:👍 "https",
+            protocol: "https",
             hostname: "images.clerk.dev",
           },
           {
