@@ -21,7 +21,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
       <ThreadCard
         key={thread._id}
         id={thread._id}
-        currentUserId={user?.id}
+        currentUserId={user?.id || ""}
         parentId={thread.parentId}
         content={thread.text}
         author={thread.author}
@@ -29,6 +29,10 @@ const Page = async ({ params }: { params: { id: string } }) => {
         createdAt={thread.createdAt}
         comments={thread.children}
       />
+    </div>
+
+    <div className="mt-7">
+       <Comment />
     </div>
   </section>
   )

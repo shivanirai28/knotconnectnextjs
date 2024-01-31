@@ -65,49 +65,46 @@ export async function fetchPosts(pageNumber = 1, pageSize = 20) {
           const isNext = totalPostsCount > skipAmount + posts.length;
       
           return { posts, isNext };
-    }
+};
 
-    export async function fetchThreadById(threadId: string) {
-      connectToDB();
-      try {
-        const thread = await Thread.findById(threadId)
-          .populate({
-            path: "author",
+export async function fetchThreadById(threadId: string) {
+  connectToDB();
+  try {
+    const thread = await Thread.findById(threadId)
+      .populate({
+        path: "author",
+        model: User,
+        select: "_id id name image",
+      })
+      
+      .populate({
+        path: "children", // Populate the children field
+        populate: [
+          {
+            path: "author", // Populate the author field within children
             model: User,
-            select: "_id id name image",
-          })
-          .populate({
-            path: "community",
-            model: Community,
-            select: "_id id name image",
-          })
-          .populate({
-            path: "children", // Populate the children field
-            populate: [
-              {
-                path: "author", // Populate the author field within children
-                model: User,
-                select: "_id id name parentId image", // Select only _id and username fields of the author
-              },
-              {
-                path: "children", // Populate the children field within children
-                model: Thread, // The model of the nested children (assuming it's the same "Thread" model)
-                populate: {
-                  path: "author", // Populate the author field within nested children
-                  model: User,
-                  select: "_id id name parentId image", // Select only _id and username fields of the author
-                },
-              },
-            ],
-          })
-          .exec();
-    
-        //
-        return thread;
-    
-        //
-      } catch (error) {
-        console.log("Error while fetching thread using id", error);
-        throw new Error("Not able to get the thread");
-      }
-    }
+            select: "_id id name parentId image", // Select only _id and username fields of the author
+          },
+          {
+            path: "children", // Populate the children field within children
+            model: Thread, // The model of the nested children (assuming it's the same "Thread" model)
+            populate: {
+              path: "author", // Populate the author field within nested children
+              model: User,
+              select: "_id id name parentId image", // Select only _id and username fields of the author
+            },
+          },
+        ],
+      })
+      .exec();
+
+    //
+    return thread;
+
+    //
+  } catch (error) {
+    console.log("Error while fetching thread using id", error);
+    throw new Error("Not able to get the thread");
+  }
+};
+
