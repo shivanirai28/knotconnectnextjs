@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { CommentValidation } from "@/lib/validations/thread";
-//import { addCommentToThread } from "@/lib/actions/thread.actions";
+import { addCommentToThread } from "@/lib/actions/thread.action";
 
 interface Props {
   threadId: string;
@@ -61,7 +61,7 @@ const Comment = ({ threadId, currentUserId, currentUserImg }: Props) => {
                 <Input
                   type="text"
                   {...field}
-                  placeholder="Reply here..."
+                  placeholder="Reply..."
                   className="no-focus text-light-1 outline-none"
                 />
               </FormControl>
