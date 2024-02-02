@@ -26,7 +26,7 @@ export async function createThread({
         });
 
         await User.findByIdAndUpdate(author, {
-            $push: { threads: createThread._id }
+            $push: { threads: createdThread._id }
         })
 
         revalidatePath(path);
