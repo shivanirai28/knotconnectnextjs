@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
 import { profileTabs } from "@/constants";
+import ThreadsTab from "@/components/shared/ThreadsTab";
 
 async function Page({ params }: { params: { id: string } }) {
   const user = await currentUser();
