@@ -5,7 +5,7 @@ import { clients } from "@clerk/nextjs/api";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { SignedIn, SignOutButton,useAuth } from "@clerk/nextjs";
+import { SignedIn, SignOutButton, useAuth } from "@clerk/nextjs";
 
 function LeftSidebar() {
   const router = useRouter();
